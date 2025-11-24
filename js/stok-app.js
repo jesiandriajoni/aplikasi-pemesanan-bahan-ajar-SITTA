@@ -37,6 +37,13 @@ createApp({
           harga: 51000,
           stok: 12,
         },
+        {
+          id: 6,
+          kode: "STSI4209",
+          nama: "Pemograman Berbasis Web",
+          harga: 60000,
+          stok: 3,
+        },
       ],
     };
   },
@@ -44,7 +51,11 @@ createApp({
     // Computed Property (Filter Data)
     listBahanAjarTersaring() {
       return this.bahanAjar.filter((item) => {
-        return item.nama.toLowerCase().includes(this.keyword.toLowerCase());
+        const key = this.keyword.toLowerCase();
+        return (
+          item.nama.toLowerCase().includes(key) ||
+          item.kode.toLowerCase().includes(key)
+        );
       });
     },
     totalItem() {
@@ -61,6 +72,11 @@ createApp({
     },
     cekWarnaStok(stok) {
       return stok < 10 ? "stok-kritis" : "stok-aman";
+    },
+
+    kurangiStok(index) {
+      //mengurangi stok item filter
+      this.listBahanAjarTersaring[index].stok--;
     },
     tambahStok(index) {
       // Menambah stok pada item hasil filter

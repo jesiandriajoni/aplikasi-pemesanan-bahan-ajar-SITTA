@@ -29,7 +29,7 @@
             type="text"
             class="form-control"
             v-model="keyword"
-            placeholder="Ketik nama modul..."
+            placeholder="Ketik kode/nama modul..."
           />
           <small class="text-muted"
             >Status Pencarian: {{ pesanPencarian }}</small
@@ -65,6 +65,13 @@
             </td>
 
             <td>
+              <button
+                class="btn btn-sm btn-warning"
+                v-on:click="kurangiStok(index)"
+              >
+                - Stok
+              </button>
+              ||
               <button
                 class="btn btn-sm btn-primary"
                 v-on:click="tambahStok(index)"

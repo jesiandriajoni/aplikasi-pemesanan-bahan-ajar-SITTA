@@ -19,6 +19,7 @@ createApp({
           status: "Dalam Perjalanan",
         },
         { noDO: "DO-54321", penerima: "Andi Wijaya", status: "Terkirim" },
+        { noDO: "DO-98291", penerima: "Jesi andria joni", status: "Diterima" },
       ],
     };
   },
