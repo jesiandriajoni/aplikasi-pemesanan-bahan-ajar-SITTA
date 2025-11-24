@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stok Bahan Ajar - SITTA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .stok-kritis {
+        color: red;
+        font-weight: bold;
+      }
+      .stok-aman {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-stok" class="container mt-4">
+      <h2 v-text="judulHalaman"></h2>
+      <a href="index.html" class="btn btn-secondary mb-3">&laquo; Kembali</a>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <label>Cari Nama Bahan Ajar:</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="keyword"
+            placeholder="Ketik nama modul..."
+          />
+          <small class="text-muted"
+            >Status Pencarian: {{ pesanPencarian }}</small
+          >
+        </div>
+      </div>
+
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Kode</th>
+            <th>Nama Bahan Ajar</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in listBahanAjarTersaring" :key="item.id">
+            <td>{{ item.kode }}</td>
+            <td>{{ item.nama }}</td>
+            <td>{{ formatRupiah(item.harga) }}</td>
+
+            <td v-bind:class="cekWarnaStok(item.stok)">{{ item.stok }}</td>
+
+            <td>
+              <span v-if="item.stok > 10" class="badge bg-success">Aman</span>
+              <span v-else-if="item.stok > 0" class="badge bg-warning text-dark"
+                >Hampir Habis</span
+              >
+              <span v-else class="badge bg-danger">Habis</span>
+            </td>
+
+            <td>
+              <button
+                class="btn btn-sm btn-primary"
+                v-on:click="tambahStok(index)"
+              >
+                + Stok
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-info">
+        Total Jenis Buku Ditampilkan: <strong>{{ totalItem }}</strong>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/stok-app.js"></script>
+  </body>
+</html>

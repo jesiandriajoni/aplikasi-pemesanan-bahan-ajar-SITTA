@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tracking DO - SITTA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app-tracking" class="container mt-4">
+      <h2>Lacak Status Pengiriman (DO)</h2>
+      <a href="index.html" class="btn btn-secondary mb-3">&laquo; Kembali</a>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card shadow p-4">
+            <div class="mb-3">
+              <label for="resi" class="form-label"
+                >Masukkan Nomor Resi / DO:</label
+              >
+              <input
+                type="text"
+                id="resi"
+                class="form-control"
+                v-model="nomorResi"
+                placeholder="Contoh: DO-12345"
+              />
+              <div v-if="errorPesan" class="text-danger mt-1">
+                {{ errorPesan }}
+              </div>
+            </div>
+
+            <button
+              class="btn btn-primary w-100"
+              v-bind:disabled="!isInputValid"
+              v-on:click="lacakPesanan"
+            >
+              Lacak Sekarang
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div v-show="hasilTracking" class="card shadow p-4 bg-light">
+            <h4>Status Pengiriman</h4>
+            <hr />
+            <ul>
+              <li>Nomor DO: <strong>{{ hasilTracking?.noDO }}</strong></li>
+              <li>Penerima: <span v-text="hasilTracking?.penerima"></span></li>
+              <li>
+                Status Terkini:
+                <span class="badge bg-info">{{ hasilTracking?.status }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/tracking-app.js"></script>
+  </body>
+</html>
